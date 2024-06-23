@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What should we eat?</title>
+<style>
+  body {
+    background-color: #663399; /* Purple */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    color: white;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  h1 {
+    font-size: 2.5em;
+    margin-top: 20px;
+  }
+
+  .button-container {
+    position: relative;
+    margin-top: 30px;
+  }
+
+  .pacman-button {
+    position: relative;
+    background-color: #0074D9; /* Blue */
+    color: transparent;
+    padding: 100px; /* increased padding to make button bigger */
+    font-size: 1.5em;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s;
+    overflow: hidden;
+    clip-path: polygon(
+      50% 50%,
+      100% 0%,
+      100% 100%,
+      0% 100%,
+      0% 0%,
+      55% 50%
+    );
+    transform: rotate(90deg); /* Rotate the button by 90 degrees */
+  }
+
+  .inner-circle {
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    background-color: #FFD700; /* Yellow */
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1; /* Ensure it's behind the button */
+  }
+
+  .outer-circle {
+    position: absolute;
+    width: 300%; /* Increased size */
+    height: 300%; /* Increased size */
+    background-color: #FFD700; /* Yellow */
+    border-radius: 50%;
+    top: -100%; /* Adjusted position */
+    left: -100%; /* Adjusted position */
+    z-index: -1; /* Ensure it's behind the button */
+  }
+
+  .yellow-circle {
+    position: absolute;
+    width: 50px; /* Adjust size as needed */
+    height: 50px; /* Adjust size as needed */
+    background-color: #FFD700; /* Yellow */
+    border-radius: 50%;
+    top: 50%;
+    left: 200px; /* Adjust distance from the button */
+    transform: translate(-50%, -50%);
+  }
+
+  .yellow-circle:last-child {
+    left: 250px;
+  }
+
+  .black-dot {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: black; /* Black */
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .restaurant-list {
+    margin-top: 50px;
+    text-align: center;
+  }
+
+  .restaurant {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+</style>
+</head>
+<body>
+  <h1>What should we eat?</h1>
+  <div class="button-container">
+    <button class="pacman-button" onclick="chooseRestaurant()">
+      <div class="outer-circle"></div>
+      <div class="inner-circle"></div>
+      <div class="black-dot"></div>
+    </button>
+    <div class="yellow-circle"></div>
+    <div class="yellow-circle"></div>
+  </div>
+  <div class="restaurant-list">
+    <div id="restaurant-container"></div>
+  </div>
+
+  <script>
+    function chooseRestaurant() {
+      const restaurants = [
+        "Panino",
+        "Arais",
+        "Saluf & Sons",
+        "Benedict",
+        "Vitrina",
+        "ZETZ TLV",
+        "Under the Tree Levont",
+        "Fifty and one",
+        "Brooklyn Pizza",
+        "Tulip",
+        "Go Noodles",
+        "Delicatessen",
+        "Hummus Gingi TLV",
+        "pura vida",
+        "Okinawa Levontin",
+        "Kuba Levinski",
+        "The Pasta At Levinsky",
+        "Garger HaZahav",
+        "Taqueria",
+        "ווק טו ווק נחלת בנימין",
+        "Yonita",
+        "Azura Restaurant",
+        "Saône Rhone",
+        "Thai at Har Sinai",
+        "אווה סאפי",
+        "Petrozilia",
+        "Herzl 16",
+        "Port 19",
+        "Arias Machne Yehuda",
+        "פריז טקסס תל אביב - רוטשילד",
+        "Pizza Lila"
+     ] ;
+
+      const randomIndex = Math.floor(Math.random() * restaurants.length);
+      const chosenRestaurant = restaurants[randomIndex];
+
+      const restaurantContainer = document.getElementById("restaurant-container");
+      restaurantContainer.innerHTML = ""; // Clear previous choice
+      const restaurantElement = document.createElement("div");
+      restaurantElement.classList.add("restaurant");
+      restaurantElement.textContent = chosenRestaurant;
+      restaurantContainer.appendChild(restaurantElement);
+      
+      // Show the additional yellow circle on button click
+      const yellowCircles = document.querySelectorAll('.yellow-circle');
+      yellowCircles.forEach(circle => {
+        circle.style.display = 'block';
+      });
+    }
+  </script>
+</body>
+</html>
